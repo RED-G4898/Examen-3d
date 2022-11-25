@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="inventariosUIA-1" />
+        <module name="Examen-3d" />
+        <module name="Examen-3a" />
+        <module name="Examen-3d-solucion" />
+        <module name="inventariosUIA-2" />
+        <module name="Examen-3c - solucion" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
