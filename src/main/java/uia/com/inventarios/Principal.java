@@ -15,6 +15,7 @@ public class Principal {
         System.out.println("Hola UIA, Realizando Examen 3c, Retiro de Material");
 
 
+        /*
         //funcionalidad transitoria para construcción del reporte de nivel de inventario
         NivelInventario inventario = new NivelInventario();
 
@@ -59,17 +60,20 @@ public class Principal {
         solicitudAjuste.agrega("100","Material Oficina","130","Escritorios","133","Escritorio secretarial clase 1", lote9, 10, "25-11-2022");
         solicitudAjuste.agrega("100","Material Oficina","130","Escritorios","135","Escritorio de espera ", lote11, 10, "25-11-2022");
         solicitudAjuste.serializa();
+        */
 
 
 
+
+        GestorAjusteNivel gestorAjusteNivel = new GestorAjusteNivel(new ReporteAjusteNivel());
 
 
         IAjusteNivel inventario2 = null;
         gestorAjusteNivel = new GestorAjusteNivel(inventario2);
         gestorAjusteNivel.cargaSolicitudRetiro("SolicitudAjusteNivel_1.json");   // Esta es la solicitud o archivo fuente o documento que se quiere agregar o que se usa para actualizar
         gestorAjusteNivel.cargaInventario("ReporteNivelInventario-14.json");   // Este es documento objetivo.. el que quieren actualizar
-        //gestorAjusteNivel.cargaSolicitudAjusteNivelToInventario();
-        //gestorAjusteNivel.serializaNivelInventario("ReporteNivelInventario-14.json");
+        gestorAjusteNivel.cargaSolicitudAjusteNivelToInventario();
+        gestorAjusteNivel.serializaNivelInventario("ReporteNivelInventario-14.json");
 
         SpringApplication.run(Principal.class, args);
     }

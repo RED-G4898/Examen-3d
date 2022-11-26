@@ -83,4 +83,10 @@ public class SolicitudAjusteNivel extends RegistroItem implements IAjusteNivel
         item = this.inventario.agrega("Item", idPartida,descPartida, idSubpartida, descSubpartida, idCat, descCat,  lote, minimoNivel, fechaActualizacion);
     }
 
+    @Override
+    public void cargaSolicitudAjusteNivelToInventario() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        SolicitudAjusteNivel sem = mapper.readValue(new File(id), SolicitudAjusteNivel.class);
+        this.inventario = sem.getInventario();
+    }
 }

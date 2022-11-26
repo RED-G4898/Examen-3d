@@ -239,4 +239,45 @@ public class NivelInventario extends PartidaInventario{
         mapper.writeValue(new File(s), this);
     }
 
+    public InfoItem ajustaNivelInventario(String idPartida, String idSubpartida, String idCat,
+            CategoriaInventario cat, String descCat, String cantidadSEM, int minimoNivelSEM, String fechaActualizacionSEM, String cantidadNivelInventario, int minimoNivelInventario, String fechaActualizacionInventario, Lote lote)
+            throws IOException {
+        InfoItem item = null;
+
+        if (this.getItems().get(idPartida) != null) {
+            if (this.getItems().get(idPartida).getItems().get(idSubpartida) != null) {
+                if (this.getItems().get(idPartida).getItems().get(idSubpartida).getItems().get(idCat) != null) {
+
+                    String ubicP = String.valueOf(Integer.parseInt(idPartida) / 100);
+                    char ubicS = (char) (65 + (Integer.parseInt(idSubpartida) / 100) / 10);
+                    String ubicC = String.valueOf((Integer.parseInt(idCat) - Integer.parseInt(idSubpartida)));
+                    this.getItems().get(idPartida).getItems().get(idSubpartida).getItems().put(idCat, cat);
+
+                    // Ajustes de inventario de acuerdo con SEM
+                    int cantidadAjuste = Integer.parseInt(cantidadSEM);
+                    int minimoNivelAjuste = minimoNivelSEM;
+                    String fechaActualizacionAjuste = fechaActualizacionSEM;
+                    for (int i = 0; i < cantidadAjuste; i++) {
+                        String ubic = ubicP + ubicS + ubicC + String.valueOf(i);
+                        String idItem = idCat + String.valueOf(i);
+                        item = new InfoItem("Item", idItem, descCat, "SinEstatus", "1", ubic);
+                        item.setLote(lote);
+                        this.getItems().get(idPartida).getItems().get(idSubpartida).getItems().get(idCat).getItems()
+                                .put(idItem, item);
+                    }
+                    // Asignación de valores en SEM a Inventario
+                    this.getItems().get(idPartida).getItems().get(idSubpartida).getItems().get(idCat)
+                            .setCantidad(String.valueOf(cantidadAjuste));
+                    this.getItems().get(idPartida).getItems().get(idSubpartida).getItems().get(idCat)
+                            .setMinimoNivel(minimoNivelAjuste);
+                    this.getItems().get(idPartida).getItems().get(idSubpartida).getItems().get(idCat)
+                            .setFechaActualizacionNivel(fechaActualizacionAjuste);
+                }
+
+            }
+
+        }
+        return item;
+    }
+
 }
